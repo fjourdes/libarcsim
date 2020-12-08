@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(json)
 
 set(HEADERS
     include/json/autolink.h
@@ -25,14 +27,6 @@ set(SOURCES
     src/lib_json/json_writer.cpp
 )
 
-# Set include directories.
-include_directories(
-    include/
-)
-
-# Disable stupid MSVC compiler warnings.
-add_definitions(-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS)
-
 set(CMAKE_DEBUG_POSTFIX "d")
 
 add_library(json STATIC
@@ -41,20 +35,10 @@ add_library(json STATIC
     ${SOURCES}
 )
 
-# propnet has the following dependencies.
-#add_dependencies(propnet
-#)
+target_compile_options(json PRIVATE -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS)
 
-# Set link libraries.
-#target_link_libraries(propnet
-#    ${Boost_LIBRARIES}
-#)
+target_include_directories(json PUBLIC 
+                           $<INSTALL_INTERFACE:include>
+                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> )
 
-# install(TARGETS propnet
-#         RUNTIME DESTINATION bin
-#         LIBRARY DESTINATION lib
-#         ARCHIVE DESTINATION lib)
-#
-# #install(DIRECTORY include
-#         DESTINATION .
-#         PATTERN "*.hpp")
+install( FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/json)

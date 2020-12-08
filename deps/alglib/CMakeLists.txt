@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(alglib)
 
 set(HEADERS
     cpp/src/alglibinternal.h
@@ -32,11 +34,6 @@ set(SOURCES
     cpp/src/statistics.cpp
 )
 
-# Set include directories.
-# include_directories()
-
-# Disable stupid MSVC compiler warnings.
-# add_definitions(-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS)
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
@@ -45,20 +42,12 @@ add_library(alglib STATIC
     ${SOURCES}
 )
 
-# propnet has the following dependencies.
-#add_dependencies(propnet
-#)
+target_compile_options(alglib PRIVATE -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS)
 
-# Set link libraries.
-#target_link_libraries(propnet
-#    ${Boost_LIBRARIES}
-#)
 
-# install(TARGETS propnet
-#         RUNTIME DESTINATION bin
-#         LIBRARY DESTINATION lib
-#         ARCHIVE DESTINATION lib)
-#
-# #install(DIRECTORY include
-#         DESTINATION .
-#         PATTERN "*.hpp")
+target_include_directories(alglib PUBLIC 
+                           $<INSTALL_INTERFACE:include>
+                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cpp/src> )
+
+
+install( FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/alglib)

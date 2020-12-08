@@ -1,0 +1,20 @@
+# Config file for the ArcSim package
+# Defines the imported target ArcSim::arcsim ArcSim::alglib ArcSim::json
+
+@PACKAGE_INIT@
+
+list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}" HAS_ARCSIM_CMAKE_MODULE_PATH)
+
+if(HAS_ARCSIM_CMAKE_MODULE_PATH EQUAL -1)
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+endif()
+
+set(ARCSIM_WITH_BOOST  "@ARCSIM_WITH_BOOST@" CACHE INTERNAL "")
+set(ARCSIM_WITH_PNG    "@ARCSIM_WITH_PNG@" CACHE INTERNAL "")
+
+
+if( NOT TARGET ArcSim::arcsim )
+    include("${CMAKE_CURRENT_LIST_DIR}/ArcSimTargets.cmake")
+endif()
+
+check_required_components(Argus)
