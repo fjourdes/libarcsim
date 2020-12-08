@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <algorithm>
+#include <cassert>
 
 namespace arcsim {
 

@@ -27,6 +27,8 @@
 #ifndef IO_HPP
 #define IO_HPP
 
+#include <arcim/arcsim.hpp>
+
 #include "mesh.hpp"
 
 namespace arcsim {
@@ -51,12 +53,17 @@ namespace arcsim {
     void save_transformation(const Transformation &tr,
                              const std::string &filename);
 
+#ifdef ARCSIM_WITH_PNG
 // w_crop and h_crop specify a multiplicative crop window
     void save_screenshot(const std::string &filename);
+#endif
 
+#ifdef ARCSIM_WITH_BOOST
 // check that output directory exists; if not, create it
     void ensure_existing_directory(const std::string &path);
 
     void copy_file(const string &input, const string &output);
+#endif
+
 }
 #endif

@@ -28,6 +28,7 @@
 #include "util.hpp"
 #include <fstream>
 #include <map>
+#include <cassert>
 
 using namespace std;
 

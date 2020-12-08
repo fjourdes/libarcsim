@@ -25,6 +25,7 @@
 */
 
 #include "bah.hpp"
+#include <cassert>
 
 namespace arcsim {
 	Box &Box::operator+=(const Vec2 &u) {

@@ -1,4 +1,5 @@
 #include "bhcollision.hpp"
+#include "collision.hpp"
 #include "simulation.hpp"
 #include "geometry.hpp"
 #include "magic.hpp"

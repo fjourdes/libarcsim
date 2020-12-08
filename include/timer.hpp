@@ -31,11 +31,12 @@
 #include <time.h>
 #include <cstdlib>
 #include <iostream>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <chrono>
 
 namespace arcsim {
     struct Timer {
-        boost::posix_time::ptime then;
+        using time_point = std::chrono::time_point< std::chrono::system_clock>;
+        time_point then;
         double last, total;
 
         Timer();

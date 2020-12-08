@@ -27,8 +27,6 @@
 #include <iostream>
 #include "timer.hpp"
 #include "simulation.hpp"
-using namespace std;
-using namespace boost::posix_time;
 
 namespace arcsim {
     Timer::Timer() : last(0), total(0) {
@@ -36,12 +34,13 @@ namespace arcsim {
     }
 
     void Timer::tick() {
-        then = microsec_clock::local_time();
+        then = std::chrono::system_clock::now();
     }
 
     void Timer::tock() {
-        ptime now = microsec_clock::local_time();
-        last = (now - then).total_microseconds() * 1e-6;
+        time_point now = std::chrono::system_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - then);
+        last =  duration.count() * 1e-6;
         total += last;
         then = now;
     }

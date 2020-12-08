@@ -79,15 +79,6 @@ namespace arcsim {
         return out;
     }
 
-    inline string stringf(const string &format, ...) {
-        char buf[256];
-        va_list args;
-        va_start(args, format);
-        vsnprintf(buf, 256, format.c_str(), args);
-        va_end(args);
-        return std::string(buf);
-    }
-
     template<typename T>
     string name(const T *p) {
         stringstream ss;
@@ -164,7 +155,12 @@ namespace arcsim {
             n = savecount[name];
         else
             savecount[name] = n;
-        save_objs(meshvec, stringf("tmp/%s%04d", name.c_str(), n));
+
+        char buf[256];
+        snprintf(buf, 256, "tmp/%s%04d", name.c_str(), n);
+        std::string prefix(buf);
+
+        save_objs(meshvec, prefix);
         savecount[name]++;
     }
 
@@ -174,7 +170,11 @@ namespace arcsim {
             n = savecount[name];
         else
             savecount[name] = n;
-        save_obj(mesh, stringf("tmp/%s%04d.obj", name.c_str(), n));
+
+        char buf[256];
+        snprintf(buf, 256, "tmp/%s%04d.obj", name.c_str(), n);
+        std::string filename(buf);
+        save_obj(mesh, filename);
         savecount[name]++;
     }
 }

@@ -37,6 +37,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <map>
+#include <cassert>
+
 using namespace std;
 
 namespace arcsim {

@@ -35,6 +35,8 @@
 #include <algorithm>
 #include <fstream>
 #include <omp.h>
+#include <cassert>
+
 using namespace std;
 
 

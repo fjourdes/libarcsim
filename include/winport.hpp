@@ -39,16 +39,18 @@
 
 #define _USE_MATH_DEFINES // just to have M_PI
 #include <cmath>
+#include <math.h>
 
 #include <windows.h>
 #undef min
 #undef max
 #include <stdio.h>
 #define snprintf _snprintf
+#include <iostream>
+#include <cassert>
 
-#include <boost/math/special_functions/fpclassify.hpp> 
-template <class T> inline bool isfinite(const T& number) { return boost::math::isfinite(number); }
-template <class T> inline bool   finite(const T& number) { return boost::math::isfinite(number); }
+template <class T> inline bool isfinite(const T& number) { return std::isfinite(number); }
+template <class T> inline bool   finite(const T& number) { return std::isfinite(number); }
 
 inline double sqrt(int n) { return sqrt(double(n)); }
 

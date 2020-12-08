@@ -30,12 +30,12 @@
 #include "magic.hpp"
 #include "mot_parser.hpp"
 #include "util.hpp"
-#include <cassert>
 #include <cfloat>
 #include <json/json.h>
 #include <fstream>
-#include <png.h>
 #include "sstream"
+#include "winport.hpp"
+
 using namespace std;
 
 namespace arcsim {

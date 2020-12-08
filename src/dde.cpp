@@ -29,6 +29,8 @@
 #include "cloth.hpp"
 #include "util.hpp"
 
+#include "winport.hpp"
+
 using namespace std;
 
 namespace arcsim {

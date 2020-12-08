@@ -26,6 +26,8 @@
 
 #include "vectors.hpp"
 #include "blockvectors.hpp"
+#include <cassert>
+
 using namespace std;
 
 namespace arcsim {

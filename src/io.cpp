@@ -25,17 +25,24 @@
 */
 
 #include "io.hpp"
-
 #include "util.hpp"
+
+#ifdef ARCSIM_WITH_BOOST
 #define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 #undef BOOST_NO_CXX11_SCOPED_ENUMS
+#endif
+
+#ifdef ARCSIM_WITH_PNG
+#include <png.h>
+#endif
+
 #include <cassert>
 #include <cfloat>
 #include <json/json.h>
 #include <fstream>
-#include <png.h>
 #include <sstream>
+
 using namespace std;
 
 // OBJ meshes
@@ -496,6 +503,7 @@ namespace arcsim {
                     swap(pixels[(i + w * j) * 3 + c], pixels[(i + w * (h - 1 - j)) * 3 + c]);
     }
 
+#ifdef ARCSIM_WITH_PNG
     void save_png(const char *filename, int width, int height,
                   unsigned char *pixels, bool has_alpha) {
 #ifndef _WIN32
@@ -540,7 +548,9 @@ namespace arcsim {
         fclose(file);
 #endif
     }
+#endif
 
+#ifdef ARCSIM_WITH_BOOST
     void ensure_existing_directory(const std::string &path) {
         using namespace boost::filesystem;
         if (!exists(path))
@@ -562,4 +572,6 @@ namespace arcsim {
         boost::filesystem::copy_file(
                 input, output);
     }
+#endif
+
 }

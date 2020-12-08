@@ -33,6 +33,8 @@
 #include "simulation.hpp"
 #include "util.hpp"
 #include <omp.h>
+#include "winport.hpp"
+
 using namespace std;
 
 namespace arcsim {

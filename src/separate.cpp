@@ -36,6 +36,8 @@
 #include "log.hpp"
 #include <omp.h>
 #include <set>
+#include <algorithm>
+
 using namespace std;
 
 namespace arcsim {
