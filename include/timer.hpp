@@ -28,20 +28,24 @@
 #ifndef __TIMER_H
 #define __TIMER_H
 
+#include <arcsim/arcsim.hpp>
+
 #include <time.h>
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
 
 namespace arcsim {
-    struct Timer {
+    struct ARCSIM_API Timer {
         using time_point = std::chrono::time_point< std::chrono::system_clock>;
         time_point then;
         double last, total;
 
         Timer();
 
-        void tick(), tock();
+        void tick();
+
+        void tock();
     };
 }
 #endif

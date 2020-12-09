@@ -27,6 +27,7 @@
 #ifndef DYNAMICREMESH_HPP
 #define DYNAMICREMESH_HPP
 
+#include <arcim/arcsim.hpp>
 #include <map>
 #include "cloth.hpp"
 #include "nearobs.hpp"
@@ -36,40 +37,40 @@
 
 namespace arcsim {
 // void static_remesh (Cloth &cloth);
-    void static_remesh(Cloth &cloth, const vector<AccelStruct *> &obs_accs, bool collapse = true);
+    ARCSIM_API void static_remesh(Cloth &cloth, const vector<AccelStruct *> &obs_accs, bool collapse = true);
 
-    std::vector<ArgusImpact>
+    ARCSIM_API std::vector<ArgusImpact>
     collision_fixed(Cloth &cloth, std::vector<Mesh *> obs_meshes, const std::vector<Plane> &planes,
                     const std::vector<Impact> &impacts, bool plasticity);
 
-    std::vector<ArgusImpact>
+    ARCSIM_API std::vector<ArgusImpact>
     collision_refine(Cloth &cloth, std::vector<Mesh *> obs_meshes, const std::vector<Plane> &planes,
                      const std::vector<Impact> &impacts, bool plasticity);
 
-    void collision_coarsen(Cloth &cloth, std::vector<Mesh *> obs_meshes, const vector<Plane> &planes, bool plasticity);
+    ARCSIM_API void collision_coarsen(Cloth &cloth, std::vector<Mesh *> obs_meshes, const vector<Plane> &planes, bool plasticity);
 
 // void dynamic_remesh (Cloth &cloth, const std::vector<Plane> &planes,
 //                      bool plasticity);
-    void dynamic_remesh(Cloth &cloth,
+    ARCSIM_API void dynamic_remesh(Cloth &cloth,
                         bool plasticity, const vector<AccelStruct *> &obs_accs,
                         bool collapse = true);
 
-    void collapse_edges(Cloth &cloth, const std::vector<Plane> &planes, const vector<AccelStruct *> &obs_accs);
+    ARCSIM_API void collapse_edges(Cloth &cloth, const std::vector<Plane> &planes, const vector<AccelStruct *> &obs_accs);
 
-    void print_impacts(const Impact &impact);
+    ARCSIM_API void print_impacts(const Impact &impact);
 
-    void print_argus_impacts(ArgusImpact &aImpact);
+    ARCSIM_API void print_argus_impacts(ArgusImpact &aImpact);
 
-    void insert_nodes(vector<Cluster *> &clusters, Cloth &cloth, const vector<Mesh *> obs_meshes);
+    ARCSIM_API void insert_nodes(vector<Cluster *> &clusters, Cloth &cloth, const vector<Mesh *> obs_meshes);
 
-    void insert_nodes(ImpactPoint *point, Cloth &cloth);
+    ARCSIM_API void insert_nodes(ImpactPoint *point, Cloth &cloth);
 
-    RemeshOp argus_based_flip_edges(vector<Face *> &active, Mesh &mesh, const vector<AccelStruct *> &obs_accs);
+    ARCSIM_API RemeshOp argus_based_flip_edges(vector<Face *> &active, Mesh &mesh, const vector<AccelStruct *> &obs_accs);
 
-    vector<ArgusImpact> convert_to_argus(const vector<NodalImpact *> nImpacts);
+    ARCSIM_API vector<ArgusImpact> convert_to_argus(const vector<NodalImpact *> nImpacts);
 
-    void setPlaneSet(CuttingPlaneSet &planeSet);
+    ARCSIM_API void setPlaneSet(CuttingPlaneSet &planeSet);
 
-    void setPlanes(vector<Plane> &planes);
+    ARCSIM_API void setPlanes(vector<Plane> &planes);
 }
 #endif

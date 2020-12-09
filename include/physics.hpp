@@ -27,6 +27,7 @@
 #ifndef PHYSICS_HPP
 #define PHYSICS_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "cloth.hpp"
 #include "geometry.hpp"
 #include "simulation.hpp"
@@ -35,7 +36,7 @@
 
 namespace arcsim {
 
-    struct ForceCollection {
+    struct ARCSIM_API ForceCollection {
         Vec3 stretchForce;
         Vec3 bendingForce;
     };
@@ -46,9 +47,19 @@ namespace arcsim {
 	template<Space s>
 	double internal_energy(const std::vector<Face *> &faces, const std::vector<Edge *> &edges);
 
-	double constraint_energy(const std::vector<Constraint *> &cons);
+#ifndef BUILD_ARCSIM
+	extern template ARCSIM_API double internal_energy<PS>(const std::vector<Face*>&, const std::vector<Edge*>&);
 
-	double external_energy(const Cloth &cloth, const Vec3 &gravity,
+	extern template ARCSIM_API double internal_energy<WS>(const std::vector<Face*>&, const std::vector<Edge*>&);
+
+	extern template ARCSIM_API double internal_energy<PS>(const Cloth&);
+
+	extern template ARCSIM_API double internal_energy<WS>(const Cloth&);
+#endif 
+
+	ARCSIM_API double constraint_energy(const std::vector<Constraint *> &cons);
+
+	ARCSIM_API double external_energy(const Cloth &cloth, const Vec3 &gravity,
 						   const Wind &wind);
 
 // A += dt^2 dF/dx; b += dt F + dt^2 dF/dx v
@@ -66,28 +77,46 @@ namespace arcsim {
 	template<Space s>
 	void add_internal_forces(const Cloth &cloth, vector<Vec3> &forceVec);
 
-	void add_constraint_forces(const Cloth &cloth,
+#ifndef BUILD_ARCSIM
+	extern template ARCSIM_API void add_internal_forces<PS>(const std::vector<Face*>&,
+		const std::vector<Edge*>&,
+		SpMat<Mat3x3>&, std::vector<Vec3>&,
+		double);
+
+	extern template ARCSIM_API void add_internal_forces<WS>(const std::vector<Face*>&,
+		const std::vector<Edge*>&,
+		SpMat<Mat3x3>&, std::vector<Vec3>&,
+		double);
+
+	extern template ARCSIM_API void add_internal_forces<PS>(const Cloth&, SpMat<Mat3x3>&,
+		vector<Vec3>&, double);
+
+	extern template ARCSIM_API void add_internal_forces<WS>(const Cloth&, SpMat<Mat3x3>&,
+		vector<Vec3>&, double);
+#endif
+
+	ARCSIM_API void add_constraint_forces(const Cloth &cloth,
 							   const std::vector<Constraint *> &cons,
 							   SpMat<Mat3x3> &A, std::vector<Vec3> &b, double dt);
 
-	void add_external_forces(const Cloth &cloth, const Vec3 &gravity,
+	ARCSIM_API void add_external_forces(const Cloth &cloth, const Vec3 &gravity,
 							 const Wind &wind, std::vector<Vec3> &fext,
 							 std::vector<Mat3x3> &Jext);
 
-	void add_morph_forces(const Cloth &cloth, const Morph &morph, double t,
+	ARCSIM_API void add_morph_forces(const Cloth &cloth, const Morph &morph, double t,
 						  double dt,
 						  std::vector<Vec3> &fext, std::vector<Mat3x3> &Jext);
 
-	void explicit_update(Cloth &cloth, const std::vector<Vec3> &fext,
+	ARCSIM_API void explicit_update(Cloth &cloth, const std::vector<Vec3> &fext,
 						 const std::vector<Constraint *> &cons, double dt,
 						 bool update_positions = true);
 
 
-	pair<SpMat<Mat3x3>, vector<Vec3> > obtain_implicit_equation(Cloth &cloth, const vector<Vec3> &fext,
+	ARCSIM_API pair<SpMat<Mat3x3>, vector<Vec3> > obtain_implicit_equation(Cloth &cloth, const vector<Vec3> &fext,
 																const vector<Mat3x3> &Jext,
 																const vector<Constraint *> &cons, double dt, ForceCollection forces = ForceCollection());
 
-	void update(Cloth &cloth, vector<pair<Vec3, Vec3> > v_and_r, double dt,
+	ARCSIM_API void update(Cloth &cloth, vector<pair<Vec3, Vec3> > v_and_r, double dt,
 				bool update_positions = true,
 				bool update_velocities = true);
 }

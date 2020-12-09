@@ -25,6 +25,7 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "transformation.hpp"
 #include "vectors.hpp"
 #include "visualdebug.hpp"
@@ -48,7 +49,7 @@ namespace arcsim {
 
 
 // sizing field
-    struct Sizing {
+    struct ARCSIM_API Sizing {
         Mat2x2 M;
 
         Sizing() : M(Mat2x2(0)) {}
@@ -57,7 +58,7 @@ namespace arcsim {
     struct KDTree;
     struct KDNode;
 
-    struct Vert {
+    struct ARCSIM_API Vert {
         int label;
         int component;
         Vec2 u; // material space
@@ -85,7 +86,7 @@ namespace arcsim {
                 label(label), component(component), u(project<2>(x)) {}
     };
 
-    struct Node {
+    struct ARCSIM_API Node {
         int label;
         std::vector<Vert *> verts;
         Vec3 y; // plastic embedding
@@ -149,7 +150,7 @@ namespace arcsim {
                 active(active) {}
     };
 
-    struct Edge {
+    struct ARCSIM_API Edge {
 
         bool temp2;
         bool collapsed;
@@ -188,7 +189,7 @@ namespace arcsim {
         }
     };
 
-    struct Face {
+    struct ARCSIM_API Face {
         Vert *v[3]; // verts
         int label;
         int component;
@@ -221,7 +222,7 @@ namespace arcsim {
         }
     };
 
-    struct Mesh {
+    struct ARCSIM_API Mesh {
         Cloth *parent;
 
         std::vector<Vert *> verts;
@@ -276,37 +277,37 @@ namespace arcsim {
     template<typename Prim>
     const std::vector<Prim *> &get(const Mesh &mesh);
 
-    void connect(Vert *vert, Node *node); // assign vertex to node
+    ARCSIM_API void connect(Vert *vert, Node *node); // assign vertex to node
 
-    bool check_that_pointers_are_sane(const Mesh &mesh);
+    ARCSIM_API bool check_that_pointers_are_sane(const Mesh &mesh);
 
-    bool check_that_contents_are_sane(const Mesh &mesh);
+    ARCSIM_API bool check_that_contents_are_sane(const Mesh &mesh);
 
-    void compute_ms_data(Mesh &mesh); // call after mesh topology changes
-    void compute_ws_data(Mesh &mesh); // call after vert positions change
-    void compute_ms_data(Face *face);
+    ARCSIM_API void compute_ms_data(Mesh &mesh); // call after mesh topology changes
+    ARCSIM_API void compute_ws_data(Mesh &mesh); // call after vert positions change
+    ARCSIM_API void compute_ms_data(Face *face);
 
-    void compute_ms_data(Edge *edge);
+    ARCSIM_API void compute_ms_data(Edge *edge);
 
-    void compute_ms_data(Node *node);
+    ARCSIM_API void compute_ms_data(Node *node);
 
-    void compute_ws_data(std::vector<Face *> &face);
+    ARCSIM_API void compute_ws_data(std::vector<Face *> &face);
 
-    void compute_ws_data(std::vector<Node *> &node);
+    ARCSIM_API void compute_ws_data(std::vector<Node *> &node);
 
-    void build_connected_components(Mesh &mesh);
+    ARCSIM_API void build_connected_components(Mesh &mesh);
 
-    Edge *get_edge(const Node *node0, const Node *node1);
+    ARCSIM_API Edge *get_edge(const Node *node0, const Node *node1);
 
-    Face *get_face(Vert *v1, Vert *v2, Vert *v3);
+    ARCSIM_API Face *get_face(Vert *v1, Vert *v2, Vert *v3);
 
-    Vert *edge_vert(const Edge *edge, int side, int i);
+    ARCSIM_API Vert *edge_vert(const Edge *edge, int side, int i);
 
-    Vert *edge_opp_vert(const Edge *edge, int side);
+    ARCSIM_API Vert *edge_opp_vert(const Edge *edge, int side);
 
-    void update_indices(Mesh &mesh);
+    ARCSIM_API void update_indices(Mesh &mesh);
 
-    void mark_nodes_to_preserve(Mesh &mesh);
+    ARCSIM_API void mark_nodes_to_preserve(Mesh &mesh);
 
     inline Vec2 derivative(double a0, double a1, double a2, const Face *face) {
         return face->invDm.t() * Vec2(a1 - a0, a2 - a0);
@@ -321,28 +322,28 @@ namespace arcsim {
         return face->invDm.t() * Mat2x3::rows(Vec3(-1, 1, 0), Vec3(-1, 0, 1));
     }
 
-    void apply_transformation_onto(const Mesh &start_state, Mesh &onto,
+    ARCSIM_API void apply_transformation_onto(const Mesh &start_state, Mesh &onto,
                                    const Transformation &tr);
 
-    void apply_transformation(Mesh &mesh, const Transformation &tr);
+    ARCSIM_API void apply_transformation(Mesh &mesh, const Transformation &tr);
 
-    void update_x0(Mesh &mesh);
+    ARCSIM_API void update_x0(Mesh &mesh);
 
-    void update_n0(Mesh &mesh);
+    ARCSIM_API void update_n0(Mesh &mesh);
 
-    void backto_x0(Mesh &mesh);
+    ARCSIM_API void backto_x0(Mesh &mesh);
 
-    void backto_n0(Mesh &mesh);
+    ARCSIM_API void backto_n0(Mesh &mesh);
 
-    Mesh deep_copy(const Mesh &mesh);
+    ARCSIM_API Mesh deep_copy(const Mesh &mesh);
 
-    void delete_mesh(Mesh &mesh);
+    ARCSIM_API void delete_mesh(Mesh &mesh);
 
-    void activate_nodes(std::vector<Node *> &nodes);
+    ARCSIM_API void activate_nodes(std::vector<Node *> &nodes);
 
-    void deactivate_nodes(std::vector<Node *> &nodes);
+    ARCSIM_API void deactivate_nodes(std::vector<Node *> &nodes);
 
-    void reset_contact_forces(Mesh &mesh);
+    ARCSIM_API void reset_contact_forces(Mesh &mesh);
 }
 
 #endif

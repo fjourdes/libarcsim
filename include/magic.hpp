@@ -27,6 +27,7 @@
 #ifndef MAGIC_HPP
 #define MAGIC_HPP
 
+#include <arcsim/arcsim.hpp>
 #include <string>
 // Magic numbers and other hacks
 
@@ -124,6 +125,6 @@ namespace arcsim {
 				sim_type("argus") {}
 	};
 
-	extern Magic magic;
+	extern ARCSIM_API Magic magic;
 }
 #endif

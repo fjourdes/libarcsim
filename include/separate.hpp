@@ -27,23 +27,24 @@
 #ifndef SEPARATE_HPP
 #define SEPARATE_HPP
 
+#include <arcim/arcsim.hpp>
 #include "mesh.hpp"
 #include "collisionutil.hpp"
 
 namespace arcsim {
-    void init_meshes(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
+    ARCSIM_API void init_meshes(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
                      const std::vector<Mesh *> &obs_meshes);
 
-    bool
+    ARCSIM_API bool
     has_intersection(const std::vector<Face *> &added_faces, Mesh *mesh, const std::vector<AccelStruct *> &obs_accs);
 
-    void separate(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
+    ARCSIM_API void separate(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
                   const std::vector<Mesh *> &obs_meshes);
 
-    void ICM_separate(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
+    ARCSIM_API void ICM_separate(std::vector<Mesh *> &meshes, const std::vector<Mesh *> &old_meshes,
                       const std::vector<Mesh *> &obs_meshes, bool log = true);
 
-    int intersection_number(const vector<AccelStruct *> &accs,
+    ARCSIM_API int intersection_number(const vector<AccelStruct *> &accs,
                             const vector<AccelStruct *> &obs_accs);
 }
 #endif

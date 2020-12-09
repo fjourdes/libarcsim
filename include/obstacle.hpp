@@ -27,6 +27,7 @@
 #ifndef OBSTACLE_HPP
 #define OBSTACLE_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "mesh.hpp"
 #include "spline.hpp"
 #include "util.hpp"
@@ -35,7 +36,7 @@ namespace arcsim {
 // A class which holds both moving and static meshes.
 // Note that moving meshes MUST retain their structure across frames with only
 // positions changing.
-    struct Obstacle {
+    struct ARCSIM_API Obstacle {
     public:
         double start_time, end_time;
         bool activated;

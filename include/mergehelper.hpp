@@ -1,12 +1,13 @@
 #ifndef MERGEHELPER_HPP
 #define MERGEHELPER_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "collision.hpp"
 #include "kdtree.hpp"
 
 namespace arcsim {
 	struct ImpactPoint;
-	struct Cluster {
+	struct ARCSIM_API Cluster {
 		Vec3 x;
 		Vec2 u;
 		Node *node = NULL;
@@ -14,7 +15,7 @@ namespace arcsim {
 	};
 
 
-	struct NodalImpact {
+	struct ARCSIM_API NodalImpact {
 		double distance;
 		Vec3 normal;
 
@@ -25,7 +26,7 @@ namespace arcsim {
 		// Cluster* c2 = NULL;
 	};
 
-	struct ImpactPoint {
+	struct ARCSIM_API ImpactPoint {
 		enum Type {    // 3 different types of impact point:
 			// 1. impact point on cloth; 2. impact point on obstacle. 3. node that close to impact (not a impact point)
 					CLOTH, OBSTACLE
@@ -40,7 +41,7 @@ namespace arcsim {
 		bool toInsert;
 	};
 
-	struct MergeHelper {
+	struct ARCSIM_API MergeHelper {
 		vector<Impact> impacts;
 		vector<ImpactPoint *> impactPoints;
 		vector<NodalImpact *> nodalImpacts;

@@ -27,6 +27,7 @@
 #ifndef SIMULATION_HPP
 #define SIMULATION_HPP
 
+#include <arcim/arcsim.hpp>
 #include "cloth.hpp"
 #include "constraint.hpp"
 #include "handle.hpp"
@@ -38,13 +39,13 @@
 #include <vector>
 
 namespace arcsim {
-    struct Wind {
+    struct ARCSIM_API Wind {
         double density;
         Vec3 velocity;
         double drag;
     };
 
-    struct Simulation {
+    struct ARCSIM_API Simulation {
         // variables
         double time;
         int frame, step;
@@ -79,11 +80,11 @@ namespace arcsim {
 
     };
 
-    void prepare(Simulation &sim);
+    ARCSIM_API void prepare(Simulation &sim);
 
-    void relax_initial_state(Simulation &sim);
+    ARCSIM_API void relax_initial_state(Simulation &sim);
 
-    void delete_simulation(Simulation &sim);
+    ARCSIM_API void delete_simulation(Simulation &sim);
 
 // Helper functions
 
@@ -97,11 +98,11 @@ namespace arcsim {
     template<typename Prim>
     Prim *get(int i, const std::vector<Mesh *> &meshes);
 
-    std::vector<Vec3> node_positions(const std::vector<Mesh *> &meshes);
+    ARCSIM_API std::vector<Vec3> node_positions(const std::vector<Mesh *> &meshes);
 
-    std::vector<Vec3> node_avg_velocities(const vector<Mesh *> &meshes, double dt);
+    ARCSIM_API std::vector<Vec3> node_avg_velocities(const vector<Mesh *> &meshes, double dt);
 
-    void add_ext_and_morphs(Simulation &sim, const vector<Constraint *> &cons, std::vector<Vec3> &fext,
+    ARCSIM_API void add_ext_and_morphs(Simulation &sim, const vector<Constraint *> &cons, std::vector<Vec3> &fext,
                             std::vector<Mat3x3> &Jext, int c);
 }
 #endif

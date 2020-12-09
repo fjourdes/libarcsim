@@ -33,6 +33,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <arcim/arcsim.hpp>
+
 
 namespace arcsim {
 #define EPSILON        1e-7f
@@ -67,7 +69,18 @@ namespace arcsim {
 
 // sprintf for std::strings
 
-    std::string stringf(const std::string &format, ...);
+    inline std::string stringf(const char* format)
+    {
+        return std::string(format);
+    }
+
+    template <typename ...Args>
+    inline  std::string stringf(const char* format, Args ...args)
+    {
+        char buf[256];
+        snprintf(buf, 256, format, args...);
+        return std::string(buf);
+    }
 
 // Easy reporting of vertices and faces
 

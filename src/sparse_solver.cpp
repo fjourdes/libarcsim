@@ -272,6 +272,6 @@ namespace arcsim {
         return x;
     }
 
-    template vector<Vec3> eigen_linear_solve(const SpMat<Mat3x3> &A,
+    template ARCSIM_API vector<Vec3> eigen_linear_solve(const SpMat<Mat3x3> &A,
                                              const vector<Vec3> &b);
 }

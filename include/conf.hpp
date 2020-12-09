@@ -27,9 +27,10 @@
 #ifndef CONF_HPP
 #define CONF_HPP
 
+#include <arcim/arcsim.hpp>
 #include "simulation.hpp"
 
 namespace arcsim {
-    void load_json(const std::string &filename, Simulation &sim);
+    void ARCSIM_API load_json(const std::string &filename, Simulation &sim);
 }
 #endif

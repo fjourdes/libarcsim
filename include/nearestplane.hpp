@@ -1,24 +1,25 @@
 #ifndef NEARESTPLANE_HPP
 #define NEARESTPLANE_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "mesh.hpp"
 
 namespace arcsim {
 	typedef pair<Vec3, Vec3> TangentialPlane;
 
-	struct CuttingPlane {
+	struct ARCSIM_API CuttingPlane {
 		Vec3 pos;
 		vector<Vec3> directions;
 	};
 	typedef vector<CuttingPlane> CuttingPlanes;
 
-	struct CuttingPlaneSet {
+	struct ARCSIM_API CuttingPlaneSet {
 		vector<CuttingPlanes> nodePlanes;
 		vector<CuttingPlanes> edgePlanes;
 		vector<CuttingPlanes> facePlanes;
 	};
 
-	class NearestSearch {
+	class ARCSIM_API NearestSearch {
 	private:
 
 	public:

@@ -27,13 +27,14 @@
 #ifndef PROXIMITY_HPP
 #define PROXIMITY_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "cloth.hpp"
 #include "constraint.hpp"
 
 namespace arcsim {
-    bool in_wedge(double w, const Edge *edge0, const Edge *edge1);
+    ARCSIM_API bool in_wedge(double w, const Edge *edge0, const Edge *edge1);
 
-    std::vector<Constraint *> proximity_constraints
+    ARCSIM_API std::vector<Constraint *> proximity_constraints
             (const std::vector<Mesh *> &meshes, const std::vector<Mesh *> &obs_meshes,
              double friction, double obs_friction);
 }

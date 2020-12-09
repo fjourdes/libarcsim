@@ -1,6 +1,7 @@
 #ifndef VISUALDEBUG_HPP
 #define VISUALDEBUG_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "vectors.hpp"
 #include <vector>
 using namespace std;
@@ -15,7 +16,7 @@ namespace arcsim {
 	};
 
 
-	struct VisualInfo {
+	struct ARCSIM_API VisualInfo {
 		unsigned char key;    // Keyboard control
 		vector<Vec3> pos; // World positions
 		vector<Vec2> u_pos; // Material positions
@@ -26,7 +27,7 @@ namespace arcsim {
 		VisualInfo(unsigned char _key, Vec3 _color) : key(_key), color(_color) {}
 	};
 
-	struct VisualDebugger {
+	struct ARCSIM_API VisualDebugger {
 		static VisualDebugger *getInstance();
 
 		vector<VisualInfo> infoList;

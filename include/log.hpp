@@ -27,11 +27,12 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
+#include <arcsim/arcsim.hpp>
 #include <string>
 using namespace std;
 
 namespace arcsim {
-    class Log {
+    class ARCSIM_API Log {
     private:
         int frame = 0;
         int nodeNumber = 0;

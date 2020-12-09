@@ -27,13 +27,14 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #ifndef SPARSE_SOLVER_HPP
 #define SPARSE_SOLVER_HPP
 
+#include <arcim/arcsim.hpp>
 #include "sparse.hpp"
 #include "vectors.hpp"
 #include <Eigen/Sparse>
 
 namespace arcsim {
 
-    std::vector<double> eigen_linear_solve(const SpMat<double> &A,
+    ARCSIM_API std::vector<double> eigen_linear_solve(const SpMat<double> &A,
                                            const std::vector<double> &b);
 
     template<int m>
@@ -42,5 +43,10 @@ namespace arcsim {
 
     template<int m>
     Eigen::SparseMatrix<double> sparse_to_eigen(const SpMat<Mat<m, m> > &As_);
+
+#ifndef BUILD_ARCSIM
+    extern template ARCSIM_API vector<Vec3> eigen_linear_solve(const SpMat<Mat3x3>& A,
+        const vector<Vec3>& b);
+#endif
 }
 #endif

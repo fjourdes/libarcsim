@@ -31,4 +31,21 @@
 
 #cmakedefine ARCSIM_WITH_BOOST
 
+#ifndef WIN32
+#	define ARCSIM_EXPORT_DYNAMIC_LIBRARY
+#   define ARCSIM_IMPORT_DYNAMIC_LIBRARY
+#else
+#	define ARCSIM_EXPORT_DYNAMIC_LIBRARY __declspec( dllexport )
+#   define ARCSIM_IMPORT_DYNAMIC_LIBRARY __declspec( dllimport )
+#endif
+
+
+
+#ifdef BUILD_ARCSIM
+#	define ARCSIM_API ARCSIM_EXPORT_DYNAMIC_LIBRARY
+#else
+#	define ARCSIM_API ARCSIM_IMPORT_DYNAMIC_LIBRARY
+#endif
+
+
 #endif

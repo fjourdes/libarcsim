@@ -27,6 +27,7 @@
 #ifndef COLLISION_HPP
 #define COLLISION_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "remesh.hpp"
 #include "cloth.hpp"
 #include "constraint.hpp"
@@ -41,7 +42,7 @@ namespace arcsim {
 
 // This impact struct is used to generate initial impact data. In the Argus project we analyze this
 // and produce a corresponding ArgusImpact 
-	struct Impact {
+	struct ARCSIM_API Impact {
 		bool inverted;
 		bool self;
 		bool debug;
@@ -82,7 +83,7 @@ namespace arcsim {
 	};
 
 // ArgusImpact data structure 
-	struct ArgusImpact {
+	struct ARCSIM_API ArgusImpact {
 
 		enum Type {
 			VF, EE, VE, VV
@@ -111,21 +112,21 @@ namespace arcsim {
 	};
 
 
-	vector<Impact> find_continuous_impacts(const vector<AccelStruct *> &acc,
+	ARCSIM_API vector<Impact> find_continuous_impacts(const vector<AccelStruct *> &acc,
 										   const vector<AccelStruct *> &obs_accs);
 
-	vector<Impact> find_proximity_impacts(const vector<AccelStruct *> &acc,
+	ARCSIM_API vector<Impact> find_proximity_impacts(const vector<AccelStruct *> &acc,
 										  const vector<AccelStruct *> &obs_accs);
 
-	vector<Impact> find_proximity_impacts(const vector<Face *> &added_faces,
+	ARCSIM_API vector<Impact> find_proximity_impacts(const vector<Face *> &added_faces,
 										  const vector<AccelStruct *> &obs_accs);
 
-	vector<Impact> prepare_impacts(std::vector<Mesh *> &meshes,
+	ARCSIM_API vector<Impact> prepare_impacts(std::vector<Mesh *> &meshes,
 								   const std::vector<Mesh *> &obs_meshes);
 
-	bool has_proximity(const std::vector<Face *> &added_faces, const std::vector<AccelStruct *> &obs_accs);
+	ARCSIM_API bool has_proximity(const std::vector<Face *> &added_faces, const std::vector<AccelStruct *> &obs_accs);
 
-	double distanceToObs(Edge *edge, const std::vector<AccelStruct *> &obs_accs, double *w = NULL,
+	ARCSIM_API double distanceToObs(Edge *edge, const std::vector<AccelStruct *> &obs_accs, double *w = NULL,
 						 Vec3 *n = NULL, Vec3 *obsX = NULL);
 
 /*

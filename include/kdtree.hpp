@@ -1,6 +1,7 @@
 #ifndef KDTREE_HPP
 #define KDTREE_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "mesh.hpp"
 
 #include <vector>
@@ -18,7 +19,7 @@ namespace arcsim {
 
     typedef void (*TraverseCallback)(KDNode *node);
 
-    struct KDBox {
+    struct ARCSIM_API KDBox {
         double min[dimension];
         double max[dimension];
 
@@ -53,7 +54,7 @@ namespace arcsim {
         void drawBox();
     };
 
-    struct KDNode {
+    struct ARCSIM_API KDNode {
         unsigned int axis;    // axis used to select the splitting plane
         KDBox *box;    // division point along the corresponding axis.
 
@@ -76,7 +77,7 @@ namespace arcsim {
         void deleteKDNode();
     };
 
-    struct KDTree {
+    struct ARCSIM_API KDTree {
         KDNode *root = NULL;    // root node.
 
         KDBox *box = NULL;    // The box that contain all vertices.

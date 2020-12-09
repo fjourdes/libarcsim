@@ -302,18 +302,18 @@ namespace arcsim {
         return E;
     }
 
-    template double internal_energy<PS>(const std::vector<Face *> &, const std::vector<Edge *> &);
+    template ARCSIM_API double internal_energy<PS>(const std::vector<Face *> &, const std::vector<Edge *> &);
 
-    template double internal_energy<WS>(const std::vector<Face *> &, const std::vector<Edge *> &);
+    template ARCSIM_API double internal_energy<WS>(const std::vector<Face *> &, const std::vector<Edge *> &);
 
     template<Space s>
     double internal_energy(const Cloth &cloth) {
         return internal_energy<s>(cloth.mesh.faces, cloth.mesh.edges);
     }
 
-    template double internal_energy<PS>(const Cloth &);
+    template ARCSIM_API double internal_energy<PS>(const Cloth &);
 
-    template double internal_energy<WS>(const Cloth &);
+    template ARCSIM_API double internal_energy<WS>(const Cloth &);
 
 // A = dt^2 J + dt damp J
 // b = dt f + dt^2 J v + dt damp J v
@@ -380,10 +380,10 @@ namespace arcsim {
         add_internal_forces<s>(cloth.mesh.faces, cloth.mesh.edges, A, b, dt);
     }
 
-    template void add_internal_forces<PS>(const Cloth &, SpMat<Mat3x3> &,
+    template ARCSIM_API void add_internal_forces<PS>(const Cloth &, SpMat<Mat3x3> &,
                                           vector<Vec3> &, double);
 
-    template void add_internal_forces<WS>(const Cloth &, SpMat<Mat3x3> &,
+    template ARCSIM_API void add_internal_forces<WS>(const Cloth &, SpMat<Mat3x3> &,
                                           vector<Vec3> &, double);
 
     template<Space s>
@@ -415,9 +415,9 @@ namespace arcsim {
 
     }
 
-    template void add_internal_forces<PS>(const Cloth &, vector<Vec3> &);
+    template ARCSIM_API void add_internal_forces<PS>(const Cloth &, vector<Vec3> &);
 
-    template void add_internal_forces<WS>(const Cloth &, vector<Vec3> &);
+    template ARCSIM_API void add_internal_forces<WS>(const Cloth &, vector<Vec3> &);
 
     bool contains(const Mesh &mesh, const Node *node) {
         return node->index < mesh.nodes.size() && mesh.nodes[node->index] == node;

@@ -114,7 +114,9 @@ namespace arcsim {
 
     inline void debug_save_spmat(const SpMat<double> &A) {
         static int n = 0;
-        std::fstream file(stringf("tmp/spmat%d", n++).c_str(), std::ios::out);
+
+        std::string filename = "tmp/spmat" + std::to_string(n++);
+        std::fstream file(filename.c_str(), std::ios::out);
         file << "SparseArray[{";
         for (int i = 0; i < A.m; i++) {
             const SpVec<double> &row = A.rows[i];

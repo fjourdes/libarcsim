@@ -384,6 +384,7 @@ namespace arcsim {
 			return false;
 		}
 		assert(false);    // Impossible to get here
+		return false;
 	}
 
 	bool MergeHelper::moveToCloseEdge(ImpactPoint *point, Cloth &cloth) {
