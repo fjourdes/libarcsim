@@ -511,7 +511,7 @@ namespace arcsim {
             string fmt;
             parse(fmt, json);
             for (int i = 0; true; i++) {
-                string filename = stringf(fmt, i);
+                std::string filename = fmt + std::to_string(i);
                 if (!fstream(filename.c_str(), ios::in))
                     break;
                 Obstacle obs;
@@ -541,7 +541,7 @@ namespace arcsim {
                                      const int frameEnd) {
         file_names.resize(frameEnd - frameStart + 1);
         for (int m = frameStart; m <= frameEnd; m++) {
-            file_names[m - frameStart] = stringf(format, m);
+            file_names[m - frameStart] = format + std::to_string(m);
         }
     }
 
