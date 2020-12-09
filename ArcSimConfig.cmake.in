@@ -17,4 +17,4 @@ if( NOT TARGET ArcSim::arcsim )
     include("${CMAKE_CURRENT_LIST_DIR}/ArcSimTargets.cmake")
 endif()
 
-check_required_components(Argus)
+check_required_components(ArcSim)
