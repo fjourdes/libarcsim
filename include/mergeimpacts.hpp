@@ -1,6 +1,7 @@
 #ifndef MERGEIMPACTS_HPP
 #define MERGEIMPACTS_HPP
 
+#include <arcsim/arcsim.hpp>
 #include "collision.hpp"
 
 namespace arcsim {
@@ -26,7 +27,7 @@ namespace arcsim {
 
 // void getMaxIndependentSet(vector<TopologicalImpact*>& tImpacts);
 
-	void merge_proximal_impacts(vector<Impact> &impacts, Mesh *mesh);
+	ARCSIM_API void merge_proximal_impacts(vector<Impact> &impacts, Mesh *mesh);
 }
 
 #endif
